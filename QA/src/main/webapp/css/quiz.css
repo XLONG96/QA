@@ -1,0 +1,23 @@
+.editor{
+    margin-left:180px;
+    margin-top:80px;
+}
+.editor .title{
+    font-size:25px;
+    margin-bottom:20px;
+    margin-left:225px;
+}
+.editor .ed-que{
+    font-size:18px;
+    margin-bottom:10px;
+}
+.editor .form-control{
+    width:600px;
+    margin-bottom:20px;
+}
+.editor .btn{
+    padding-left:60px;
+    padding-right:60px;
+    margin-left:220px;
+    margin-top:20px;
+}

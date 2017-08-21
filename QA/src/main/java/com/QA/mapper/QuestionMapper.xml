@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.QA.mapper.QuestionMapper">
+    <resultMap id="question" type="com.QA.po.Question">
+        <id column="id" property="id"></id>
+        <result column="title" property="title"></result>
+        <result column="detail" property="detail"></result>
+        <result column="authorName" property="authorName"></result>
+        <result column="authorHeadImg" property="authorHeadImg"></result>
+        <result column="replyNum" property="replyNum"></result>
+        <result column="starNum" property="starNum"></result>
+        <result column="publicTime" property="publicTime"></result>
+    </resultMap>
+
+    <select id="getQuestionList" resultMap="question">
+        select * from question limit #{startNum},#{perNum}
+    </select>
+
+    <insert id="insertQuestion" parameterType="com.QA.po.Question">
+        insert into question values(#{id},#{title},#{detail},#{authorName},#{authorHeadImg},#{replyNum},#{starNum},#{publicTime})
+    </insert>
+
+    <select id="getQuestionById" resultMap="question">
+        select * from question where id=#{id}
+    </select>
+
+    <update id="updateReplyNum" parameterType="java.lang.Integer">
+        update question set replyNum=replyNum+1 where id=#{id}
+    </update>
+</mapper>
