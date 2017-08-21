@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.QA.mapper.UserMapper">
+
+    <select id="getUserByName" parameterType="java.lang.String"
+            resultType="com.QA.po.User">
+        select * from user where username=#{username}
+    </select>
+
+    <select id="getUserById" parameterType="java.lang.Integer"
+            resultType="com.QA.po.User">
+        select * from user where id=#{id}
+    </select>
+
+    <insert id="insertUser" parameterType="com.QA.po.User">
+        insert into user values(#{id},#{username},#{sex},#{email},#{phone},#{profilePhoto},#{role},#{password})
+    </insert>
+
+    <insert id="insertUserPermission" parameterType="com.QA.po.UserPermission">
+        insert into user_permission values(#{id},#{permission},#{userId})
+    </insert>
+
+</mapper>

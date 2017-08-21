@@ -1,0 +1,71 @@
+.profile-box{
+    margin-left:180px;
+    margin-top:50px;
+    width:960px;
+}
+.profile-box .warpaper{
+    position:relative;
+    margin:0 auto;
+    z-index:0;
+    height:300px;
+    width:960px;
+    overflow:hidden;
+}
+.profile-box .head-box{
+     height:100px;
+ }
+.profile-box .headimg img{
+    margin-top:220px;
+    z-index:2;
+    position:relative;
+    margin-left:30px;
+    height:150px;
+    width:150px;
+    border-radius:5px;
+    border:5px solid white;
+}
+.profile-box .head-name{
+    margin-left:600px;
+    margin-top:20px;
+    font-size:20px;
+}
+.profile-box .selector{
+    margin-top:20px;
+    width:650px;
+    position:relative;
+}
+.profile-box .content{
+    height:300px;
+    background-color:white;
+    border:1px solid #D3D3D3;
+    border-top:hidden;
+    margin-bottom:50px;
+}
+.box-info{
+    background-color:white;
+    border:1px solid #D3D3D3;
+    border-radius:3px;
+    width:300px;
+    height:400px;
+    margin-left:670px;
+    box-shadow: 2px 2px 8px grey;
+    position:fixed;
+}
+.info-detail{
+    margin:0px;
+}
+.meun li{
+    list-style-type:none;
+    margin:40px;
+}
+.footer{
+    font-size:16px;
+    color:gray;
+    padding-top:100px;
+}
+.footer a{
+    text-decoration:none;
+}
+.footer p{
+    line-height:30px;
+}

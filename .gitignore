@@ -1,0 +1,23 @@
+#ignore this file
+
+/target/
+
+.classpath
+
+.project
+
+.settings
+
+#class file
+
+*.class
+
+*.log
+
+#Windows
+
+Thumbs.db
+
+ehthumbs.db
+
+Desktop.ini
