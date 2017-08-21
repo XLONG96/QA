@@ -9,7 +9,7 @@
 <html>
 <head>
     <title>Title</title>
-    <h1>Hello IDEA and Maven</h1>
+    <h1>You are refuse!</h1>
     <hr>
 </head>
 <body>

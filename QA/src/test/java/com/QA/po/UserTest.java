@@ -8,7 +8,7 @@ import org.junit.Test;
 public class UserTest {
     @Test
     public void toStringTest(){
-        User user = new User("xlong","123");
+        User user = new User();
         for (int i = 0; i < 5; i++) {
             System.out.println(user.toString());
         }
@@ -16,7 +16,7 @@ public class UserTest {
 
     @Test
     public void getNameTest(){
-        User user = new User("xlong2","123");
+        User user = new User();
         System.out.println(user.getUsername());
     }
 }
