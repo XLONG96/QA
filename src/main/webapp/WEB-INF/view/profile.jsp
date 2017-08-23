@@ -10,6 +10,18 @@
 <head>
     <%@ include file="common.jsp"%>
     <title>我的主页</title>
+    <script>
+        $(function(){
+            $(".meun li").hover(
+                function(){
+                    $(this).css("background-color","#ade3dd");
+                },
+                function(){
+                    $(this).css("background-color","white");
+                }
+            );
+        });
+    </script>
 </head>
 <body style="overflow:scroll">
     <%@ include file="/WEB-INF/view/head.jsp"%>
@@ -44,7 +56,7 @@
         </div>
     </div>
 
-    <div class="box-info">
+    <div class="profile-infobox">
         <div class="container" id="crop-avatar">
 
             <div class="avatar-view" title="修改头像">
@@ -54,10 +66,10 @@
             <div class="modal fade" id="avatar-modal" aria-hidden="true" aria-labelledby="avatar-modal-label" role="dialog" tabindex="-1">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
-                        <form class="avatar-form" action="#" enctype="multipart/form-data" method="post">
+                        <form class="avatar-form" action="${baseurl}headimgupload" enctype="multipart/form-data" method="post">
                             <div class="modal-header">
                                 <button class="close" data-dismiss="modal" type="button">&times;</button>
-                                <h4 class="modal-title" id="avatar-modal-label">Change Avatar</h4>
+                                <h4 class="modal-title" id="avatar-modal-label">上传头像</h4>
                             </div>
                             <div class="modal-body">
                                 <div class="avatar-body">
@@ -66,7 +78,7 @@
                                     <div class="avatar-upload">
                                         <input class="avatar-src" name="avatar_src" type="hidden">
                                         <input class="avatar-data" name="avatar_data" type="hidden">
-                                        <label for="avatarInput">Local upload</label>
+                                        <label for="avatarInput">本地图片上传</label>
                                         <input class="avatar-input" id="avatarInput" name="avatar_file" type="file">
                                     </div>
 
@@ -83,14 +95,14 @@
                                     </div>
 
                                     <div class="row avatar-btns">
-                                        <div class="col-md-3">
-                                            <button class="btn btn-primary btn-block avatar-save" type="submit">保存</button>
+                                        <div class="col-md-3" style="left:550px">
+                                            <button class="btn btn-primary btn-block avatar-save" type="submit">保 存</button>
+                                        </div>
+                                        <div class="col-md-3" style="left:550px">
+                                            <button class="btn btn-primary" data-dismiss="modal" type="button"> 取 消 </button>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="modal-footer">
-                              <button class="btn btn-default" data-dismiss="modal" type="button">取消</button>
                             </div>
                         </form>
                     </div>
@@ -101,15 +113,36 @@
             <div class="loading" aria-label="Loading" role="img" tabindex="-1"></div>
         </div>
 
+        <div class="name">
+            <p>${user.username}</p>
+        </div>
+
         <div class="info-detail">
             <ul class="meun">
-                <li>我的问题</li>
-                <br/>
-                <li>我的回答</li>
-                <br/>
-                <li>我的关注</li>
-                <br/>
-                <li>我的粉丝</li>
+                <li>
+                    <a href="#">
+                        <span class="glyphicon glyphicon-question-sign">  我的问题</span>
+                        <span class="badge" style="margin-left:120px">${user.questionNum}</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <sapn class="glyphicon glyphicon-pencil">  我的回答</sapn>
+                        <span class="badge" style="margin-left:120px">${user.answerNum}</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="glyphicon glyphicon-globe">  我的关注</span>
+                        <span class="badge" style="margin-left:120px">${user.starNum}</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="glyphicon glyphicon-heart">  我的粉丝</span>
+                        <span class="badge" style="margin-left:120px">${user.fansNum}</span>
+                    </a>
+                </li>
             </ul>
         </div>
 

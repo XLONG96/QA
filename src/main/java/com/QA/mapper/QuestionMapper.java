@@ -15,7 +15,7 @@ public interface QuestionMapper {
 
     Question getQuestionById(int id);
 
-    int getQuestionCount(int id);
+    int getQuestionCount();
 
     void updateReplyNumById(int id);
 

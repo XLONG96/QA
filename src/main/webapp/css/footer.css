@@ -1,0 +1,52 @@
+.box-info{
+    background-color:white;
+    border:1px solid #D3D3D3;
+    border-radius:3px;
+    width:300px;
+    height:400px;
+    margin-left:670px;
+    box-shadow: 2px 2px 8px grey;
+    position:fixed;
+}
+.info-detail{
+    margin:0px;
+}
+.avatar{
+    display: block;
+    margin:30px 0 10px 70px;
+    height: 150px;
+    width: 150px;
+    border: 3px solid #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0,0,0,.15);
+    overflow: hidden;
+}
+.avatar img{
+    width: 100%;
+}
+.box-info .name p{
+    font-weight:bold;
+    text-align:center;
+    font-size:22px;
+    padding-bottom:15px;
+}
+.meun li{
+    list-style-type:none;
+    padding-left:20px;
+    padding-top:10px;
+    padding-bottom:10px;
+}
+.meun a{
+    text-decoration:none;
+}
+.footer{
+    font-size:16px;
+    color:gray;
+    padding-top:18px;
+}
+.footer a{
+    text-decoration:none;
+}
+.footer p{
+    line-height:30px;
+}

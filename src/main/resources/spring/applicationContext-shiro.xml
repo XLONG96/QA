@@ -71,7 +71,7 @@
         <property name="realm" ref="customRealm" />
 
         <!--注入缓存管理器-->
-        <property name="cacheManager" ref="cacheManager"/>
+        <property name="cacheManager" ref="shiroCacheManager"/>
 
         <!--注入会话管理器
         <property name="sessionManager" ref="sessionManager" /> -->
@@ -94,7 +94,7 @@
     </bean>
 
     <!-- 缓存管理器 -->
-    <bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+    <bean id="shiroCacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
         <property name="cacheManagerConfigFile" value="classpath:shiro-ehcache.xml"/>
     </bean>
 

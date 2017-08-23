@@ -14,7 +14,7 @@ public interface QuestionService {
 
     Question findQusetionById(int id);
 
-    int findQuestionCount(int id);
+    int findQuestionCount();
 
     void addReplyNumById(int id);
 

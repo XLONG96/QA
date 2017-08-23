@@ -21,4 +21,7 @@
         insert into user_permission values(#{id},#{permission},#{userId})
     </insert>
 
+    <update id="updateProfilePhoto">
+        update user set profilePhoto=#{url} where id=#{id}
+    </update>
 </mapper>

@@ -25,6 +25,9 @@
         select * from question where id=#{id}
     </select>
 
+    <select id="getQuestionCount" resultType="java.lang.Integer">
+        select count(*) from question;
+    </select>
     <update id="updateReplyNum" parameterType="java.lang.Integer">
         update question set replyNum=replyNum+1 where id=#{id}
     </update>

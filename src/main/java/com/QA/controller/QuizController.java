@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.Date;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
@@ -32,13 +33,13 @@ public class QuizController {
     }
 
     @RequestMapping(value="/quiz", method=POST)
-    public String quiz(HttpServletRequest request, Model model){
+    public String quiz(HttpServletRequest request, Model model, HttpSession session){
+        int uId = (Integer)session.getAttribute("loginUser");
+        User user = userService.findUserById(uId);
+        model.addAttribute("user",user);
+
         String title = request.getParameter("title");
         String detail = request.getParameter("detail");
-
-        int id = (Integer)request.getSession().getAttribute("loginUser");
-
-        User user = userService.findUserById(id);
 
         Question question = new Question();
         String msg = "";
@@ -56,8 +57,8 @@ public class QuizController {
         //保存问题
         questionService.saveQuestion(question);
 
-        msg = "问题保存成功";
+        msg = "提问成功";
         model.addAttribute("msg",msg);
-        return msg;
+        return "quiz";
     }
 }

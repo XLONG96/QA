@@ -18,6 +18,33 @@
                 dotColor: '#5cbdaa',
                 lineColor: '#5cbdaa'
             });
+
+            $("div[name=content]").hover(
+                function(){
+                    $(this).css("color","gray");
+                },
+                function(){
+                    $(this).css("color","black");
+                }
+            );
+
+            $(".meun li").hover(
+                function(){
+                    $(this).css("background-color","#ade3dd");
+                },
+                function(){
+                    $(this).css("background-color","white");
+                }
+            );
+
+            $(".back-to-top").hover(
+                function(){
+                    $("#img").attr("src","/QA/images/topb.gif");
+                },
+                function(){
+                    $("#img").attr("src","/QA/images/topw.gif");
+                }
+            );
         })
     </script>
     <style>
@@ -26,11 +53,14 @@
     </style>
     <title>首页</title>
 </head>
-<body style="overflow-x: hidden;overflow-y: auto">
+<body style="overflow:scroll">
+    <a href="#top" class="back-to-top" target="_self">
+        <img src="${baseurl}images/topw.gif" id="img"/>
+    </a>
     <%@ include file="/WEB-INF/view/head.jsp"%>
-    <div class="box-main">
+    <div id="top" class="box-main">
         <div class="box">
-            <c:forEach items="${questionList}" var="que">
+            <c:forEach items="${paging.pageContent}" var="que">
                 <div class="box-que">
                     <div class="que-detail">
                         <div>
@@ -42,9 +72,9 @@
                         <div class="que-all"><span class="glyphicon glyphicon-chevron-down"></span> 阅读全文</div>
                         <div class="que-all-close" style="display:none"><span class="glyphicon glyphicon-chevron-up"></span> 收起</div>
                         <div class="que-bottom">
-                            <p><span class="glyphicon glyphicon-thumbs-up"></span> 1024赞</p>
-                            <p><span class="glyphicon glyphicon-comment"></span> ${que.replyNum}回答</p>
-                            <p><span class="glyphicon glyphicon-star"></span> ${que.starNum}收藏</p>
+                            <p><span class="glyphicon glyphicon-comment"></span> ${que.replyNum} 回答</p>
+                            <p><span class="glyphicon glyphicon-bullhorn"></span> 分享</p>
+                            <p><span class="glyphicon glyphicon-star"></span> ${que.starNum} 收藏</p>
                             <p><span class="glyphicon glyphicon-bell"></span> 举报</p>
                             <p><span class="glyphicon glyphicon-calendar"></span>
                                 <fmt:formatDate value="${que.publicTime}" type="both"/>
@@ -55,21 +85,43 @@
             </c:forEach>
         </div>
 
-        <div class="box-info">
+        <%@ include file="/WEB-INF/view/paging.jsp"%>
 
-            <div class="avatar-view" title="修改头像">
+        <div class="box-info">
+            <div class="avatar">
                 <img src="${baseurl}${user.profilePhoto}"/>
+            </div>
+
+            <div class="name">
+                <p>${user.username}</p>
             </div>
 
             <div class="info-detail">
                 <ul class="meun">
-                    <li>我的问题 ${user.}</li>
-                    <br/>
-                    <li>我的回答</li>
-                    <br/>
-                    <li>我的关注</li>
-                    <br/>
-                    <li>我的粉丝</li>
+                    <li>
+                        <a href="#">
+                            <span class="glyphicon glyphicon-question-sign">  我的问题</span>
+                            <span class="badge" style="margin-left:120px">${user.questionNum}</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <sapn class="glyphicon glyphicon-pencil">  我的回答</sapn>
+                            <span class="badge" style="margin-left:120px">${user.answerNum}</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="glyphicon glyphicon-globe">  我的关注</span>
+                            <span class="badge" style="margin-left:120px">${user.starNum}</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="glyphicon glyphicon-heart">  我的粉丝</span>
+                            <span class="badge" style="margin-left:120px">${user.fansNum}</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
 
@@ -79,7 +131,6 @@
                 <p> <a href="#">关于本站</a> @QA在线问答平台</p>
             </div>
         </div>
-
 
     </div>
 </body>

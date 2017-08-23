@@ -23,11 +23,11 @@
 <link rel="stylesheet" href="${baseurl}css/register.css" />
 <link rel="stylesheet" href="${baseurl}css/profile.css" />
 <link rel="stylesheet" href="${baseurl}css/profile-cropper.css" >
+<link rel="stylesheet" href="${baseurl}css/footer.css" >
 <!-- js -->
 <script src="${baseurl}js/jquery-2.1.1.min.js"></script>
 <script src="${baseurl}js/jquery-ui.min.js"></script>
 <script src="${baseurl}js/bootstrap.min.js"></script>
-<script src="${baseurl}js/easyui/jquery.easyui.min.1.2.2.js"></script>
 <script src="${baseurl}js/cropper.min.js"></script>
 <script src="${baseurl}js/profile-cropper.js"></script>
 <script src="${baseurl}js/verificationNumbers.js"></script>

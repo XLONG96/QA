@@ -2,7 +2,6 @@ package com.QA.service.impl;
 
 import com.QA.mapper.AnswerMapper;
 import com.QA.po.Answer;
-import com.QA.po.Paging;
 import com.QA.service.AnswerService;
 import com.googlecode.ehcache.annotations.Cacheable;
 import org.springframework.beans.factory.annotation.Autowired;

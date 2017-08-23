@@ -39,6 +39,10 @@ public class UserServiceImpl implements UserService{
         return user;
     }
 
+    public void saveProfilePhoto(int id, String url) {
+        userMapper.updateProfilePhoto(id,url);
+    }
+
     public void saveProfilePicture(int id, String url) {
 
     }

@@ -49,18 +49,28 @@ public class ProfileController {
     }
 
     @RequestMapping("/headimgupload")
-    public @ResponseBody  void HeadImgUpload(MultipartFile profilePicture,HttpSession session){
+    public @ResponseBody  void HeadImgUpload(@RequestParam("avatar_file") MultipartFile profilePicture,
+                         HttpServletRequest request, HttpSession session){
         int uid = (Integer)session.getAttribute("loginUser");
-        String url = "/upload/images/headImg/"+uid;
+        String filedir = request.getSession().getServletContext().getRealPath("/")+
+                "upload/images/headImg";
+        String filename = uid+".jpg";
+        if(!profilePicture.isEmpty()){
+            try {
+                //如果目录不存在就创建
+                File dir = new File(filedir);
+                if(!dir.exists()){
+                    dir.mkdirs();
+                }
 
-        try {
-            profilePicture.transferTo(new File(url));
+                profilePicture.transferTo(new File(filedir+"/"+filename));
 
-            userService.saveProfilePhoto(uid,url+".jpg");
+                userService.saveProfilePhoto(uid, "upload/images/headImg/"+filename);
 
-        } catch (IOException e) {
-            log.error("Unable to save the profilePicture");
-            e.printStackTrace();
+            } catch (IOException e) {
+                log.error("Unable to save the profilePicture");
+                e.printStackTrace();
+            }
         }
     }
 

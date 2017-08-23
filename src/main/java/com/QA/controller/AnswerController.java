@@ -37,7 +37,11 @@ public class AnswerController {
     private UserService userService;
 
     @RequestMapping("/answer/{questionId}")
-    public String getAnswer(@PathVariable int questionId, HttpServletRequest request, Model model){
+    public String getAnswer(@PathVariable int questionId, HttpServletRequest request, Model model, HttpSession session){
+        int uId = (Integer)session.getAttribute("loginUser");
+        User user = userService.findUserById(uId);
+        model.addAttribute("user",user);
+
         System.out.println("id="+questionId);
         Question question = questionService.findQusetionById(questionId);
         model.addAttribute("que",question);

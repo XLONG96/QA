@@ -1,5 +1,33 @@
 $(function(){
 
+    $(document).scroll(function() {
+        alert("helo");
+        //$(document).scrollTop()    滚动条位置距页面顶部的距离；
+        //$(document).height()         整个页面的总高度；
+        //$(window).height()             当前窗口的高度；
+        if ($(document).scrollTop() >= $(document).height() - $(window).height()) {   //判断是否已经滚动到页面底部；
+            alert("hello");
+        }
+    });
+
+    $(document).on("mousewheel DOMMouseScroll", function (e) {
+
+        var delta = (e.originalEvent.wheelDelta && (e.originalEvent.wheelDelta > 0 ? 1 : -1)) ||  // chrome & ie
+            (e.originalEvent.detail && (e.originalEvent.detail > 0 ? -1 : 1));              // firefox
+
+        var deltaX = e.originalEvent.x;
+        var deltaY = e.originalEvent.y;
+
+        //alert(deltaX);
+        if (delta > 100) {
+            // 向上滚
+            alert("up");
+        } else if (delta < 0) {
+            // 向下滚
+            //alert($(window).scrollHeight);
+        }
+    });
+
     //que.getQue();
     //que.appendQue();
 

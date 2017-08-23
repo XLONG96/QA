@@ -1,7 +1,7 @@
 .head{
     width:98.8%;
     position:fixed;
-    z-index:1;
+    z-index:9999;
 }
 .head-img{
     width:20px;
@@ -21,4 +21,7 @@ nav{
 }
 .search .navbar-form .form-control{
     margin-right:5px;
+}
+.dropdown-menu li{
+    padding:8px 0 8px 8px;
 }

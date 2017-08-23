@@ -3,6 +3,7 @@ package com.QA.service.impl;
 import com.QA.mapper.QuestionMapper;
 import com.QA.po.Question;
 import com.QA.service.QuestionService;
+import com.googlecode.ehcache.annotations.Cacheable;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -14,6 +15,7 @@ public class QuestionServiceImpl implements QuestionService{
     @Autowired
     private QuestionMapper questionMapper;
 
+    @Cacheable(cacheName = "questionList")
     public List<Question> findQuestionList(int startNum, int perNum) {
         List<Question> questionList = questionMapper.getQuestionList(startNum,perNum);
         return questionList;
@@ -28,8 +30,8 @@ public class QuestionServiceImpl implements QuestionService{
         return question;
     }
 
-    public int findQuestionCount(int id) {
-        return 0;
+    public int findQuestionCount() {
+        return questionMapper.getQuestionCount();
     }
 
     public void addReplyNumById(int id) {
@@ -53,6 +55,6 @@ public class QuestionServiceImpl implements QuestionService{
     }
 
     public void addReplyNum(int id) {
-        questionMapper.updateReplyNum(id);
+        questionMapper.updateReplyNumById(id);
     }
 }

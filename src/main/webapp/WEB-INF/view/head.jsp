@@ -36,12 +36,12 @@
                     <c:otherwise>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <img src="${baseurl}images/temp.jpg" class="head-img" /> <!--<b class="caret"></b>-->
+                                <img src="${baseurl}${user.profilePhoto}" class="head-img" /> <!--<b class="caret"></b>-->
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="${baseurl}people">我的主页</a></li>
-                                <li><a href="${baseurl}setting">设置</a></li>
-                                <li><a href="${baseurl}logout">退出</a></li>
+                                <li><a href="${baseurl}people"><span class="glyphicon glyphicon-user"> 我的主页</span></a></li>
+                                <li><a href="${baseurl}setting"><span class="glyphicon glyphicon-cog"> 设置</span></a></li>
+                                <li><a href="${baseurl}logout"><span class="glyphicon glyphicon-off"> 退出</span></a></li>
                             </ul>
                         </li>
                     </c:otherwise>

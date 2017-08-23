@@ -1,5 +1,6 @@
 package com.QA.controller;
 
+import com.QA.po.Paging;
 import com.QA.po.Question;
 import com.QA.po.User;
 import com.QA.service.QuestionService;
@@ -34,17 +35,33 @@ public class HomeController {
     private UserService userService;
 
     @RequestMapping(value={"/que","/"}, method=GET)
-    public String home(HttpSession session, Model model){
-        int perNum = 4;
-        int startNum = 0;
-
+    public String home(HttpServletRequest request, HttpSession session, Model model){
         int uid = (Integer)session.getAttribute("loginUser");
         User user = userService.findUserById(uid);
         model.addAttribute("user",user);
 
-        System.out.println(startNum+" "+perNum);
-        List<Question> questionList = questionService.findQuestionList(startNum,perNum);
-        model.addAttribute("questionList",questionList);
+        Paging<Question> page = new Paging();
+        page.setPerNum(10);
+
+        String cp = request.getParameter("cp");
+        if(cp == null || cp.equals("")){
+            page.setCurrentPage(1);
+        }
+        else{
+            page.setCurrentPage(Integer.parseInt(cp));
+        }
+
+        page.setTotalNum(questionService.findQuestionCount());
+        int totalPage = page.getTotalNum() / page.getPerNum();
+
+        page.setTotalPage(page.getTotalNum() % page.getPerNum() == 0 ? totalPage : totalPage + 1);
+
+        int startNum = ( page.getCurrentPage()-1 ) * page.getPerNum();
+        page.setPageContent(questionService.findQuestionList(
+                startNum, page.getPerNum()));
+
+        System.out.println(page);
+        model.addAttribute("paging",page);
 
         return "home";
     }

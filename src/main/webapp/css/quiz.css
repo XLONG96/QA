@@ -21,3 +21,6 @@
     margin-left:220px;
     margin-top:20px;
 }
+#dialog{
+    z-index:9999;
+}
