@@ -64,10 +64,13 @@
             <label class="col-sm-2 control-label">性 别</label>
             <div class="col-sm-10">
                 <div class="radio-inline">
-                    <input type="radio" name="optionsRadiosinline" id="optionsRadios1" value="option1" checked> 男
+                    <input type="radio" name="optionsRadiosinline" id="optionsRadios1" value="man" checked> 男
                 </div>
                 <div class="radio-inline">
-                    <input type="radio" name="optionsRadiosinline" id="optionsRadios2"  value="option2"> 女
+                    <input type="radio" name="optionsRadiosinline" id="optionsRadios2"  value="girl"> 女
+                </div>
+                <div class="radio-inline">
+                    <input type="radio" name="optionsRadiosinline" id="optionsRadios3"  value="other"> 其他
                 </div>
             </div>
         </div>

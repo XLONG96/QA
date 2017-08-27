@@ -3,8 +3,9 @@ package com.QA.service.impl;
 import com.QA.mapper.QuestionMapper;
 import com.QA.po.Question;
 import com.QA.service.QuestionService;
-import com.googlecode.ehcache.annotations.Cacheable;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 
 import java.util.List;
 
@@ -15,12 +16,18 @@ public class QuestionServiceImpl implements QuestionService{
     @Autowired
     private QuestionMapper questionMapper;
 
-    @Cacheable(cacheName = "questionList")
+    @Cacheable(value = "questionCache",key="#startNum")
     public List<Question> findQuestionList(int startNum, int perNum) {
+        System.out.println("====>>question>>==");
         List<Question> questionList = questionMapper.getQuestionList(startNum,perNum);
         return questionList;
     }
 
+    public List<Question> findAllQuestionList(){
+        return questionMapper.getAllQuestionList();
+    }
+
+    @CacheEvict(value="questionCache",allEntries=true)
     public void saveQuestion(Question question){
         questionMapper.insertQuestion(question);
     }
@@ -35,26 +42,30 @@ public class QuestionServiceImpl implements QuestionService{
     }
 
     public void addReplyNumById(int id) {
-
+        questionMapper.updateReplyNumById(id);
     }
 
     public void addStarNumById(int id) {
-
+        questionMapper.updateStarNumById(id);
     }
 
-    public List<Question> findQuestionListByUserId(int id, int startNum, int perNum) {
-        return null;
+    public List<Question> findQuestionListByUserName(String username, int startNum, int perNum) {
+        List<Question> list = questionMapper.getQuestionListByUserName(username,startNum,perNum);
+        return list;
     }
 
-    public List<Question> findStarQuestionListByUserId(int id, int startNum, int perNum) {
-        return null;
+    public List<Question> findStarQuestionListByUserName(String username, int startNum, int perNum) {
+        List<Question> list = questionMapper.getStarQuestionListByUserName(username,startNum,perNum);
+        return list;
     }
 
     public void dropQuestionById(int id) {
-
+        questionMapper.deleteQuestionById(id);
     }
 
-    public void addReplyNum(int id) {
-        questionMapper.updateReplyNumById(id);
+    @CacheEvict(value="questionCache",allEntries=true)
+    public void saveProfilePhoto(String username, String url) {
+        questionMapper.updateProfilePhoto(username,url);
     }
+
 }

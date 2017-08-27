@@ -1,6 +1,7 @@
 package com.QA.po;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Created by Administrator on 2017/7/14.
@@ -8,7 +9,7 @@ import java.io.Serializable;
 public class User implements Serializable {
     private int id;
     private String username;
-    private String sex;
+    private int sex;
     private String email;
     private String phone;
     private String profilePhoto;
@@ -19,6 +20,7 @@ public class User implements Serializable {
     private int answerNum;
     private int starNum;
     private int commentNum;
+    private Date registerTime;
 
     public User() {
     }
@@ -44,11 +46,11 @@ public class User implements Serializable {
         this.username = username;
     }
 
-    public String getSex() {
+    public int getSex() {
         return sex;
     }
 
-    public void setSex(String sex) {
+    public void setSex(int sex) {
         this.sex = sex;
     }
 
@@ -76,20 +78,20 @@ public class User implements Serializable {
         this.profilePhoto = profilePhoto;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public String getRole() {
         return role;
     }
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public int getFansNum() {
@@ -130,6 +132,14 @@ public class User implements Serializable {
 
     public void setCommentNum(int commentNum) {
         this.commentNum = commentNum;
+    }
+
+    public Date getRegisterTime() {
+        return registerTime;
+    }
+
+    public void setRegisterTime(Date registerTime) {
+        this.registerTime = registerTime;
     }
 
     @Override

@@ -131,7 +131,17 @@ public class UserController {
         User user = new User();
         String username = request.getParameter("username");
         String sex = request.getParameter("sex");
-        System.out.println(sex);
+        System.out.println("======>>>>sex:"+sex);
+        if(sex == null || sex.equals("")){
+            sex = "2";
+        }else if(sex.equals("man")){
+            sex = "0";
+        }else if(sex.equals("girl")){
+            sex = "1";
+        }else{
+            sex = "2";
+        }
+
         String email = request.getParameter("email");
         String phone = request.getParameter("phone");
         String profilePhone = request.getParameter("profilePhone");
@@ -142,7 +152,7 @@ public class UserController {
         }
 
         if(sex != null){
-            user.setSex(sex);
+            user.setSex(Integer.parseInt(sex));
         }
 
         if(email != null){

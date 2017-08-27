@@ -4,14 +4,18 @@ import com.QA.po.Question;
 import com.QA.po.User;
 import com.QA.service.QuestionService;
 import com.QA.service.UserService;
+import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -28,15 +32,17 @@ public class QuizController {
     private UserService userService;
 
     @RequestMapping(value="/quiz",method=GET)
-    public String quiz(){
+    public String quiz(HttpSession session, Model model){
+        int uid = (Integer)session.getAttribute("loginUser");
+        User user = userService.findUserById(uid);
+        model.addAttribute("user",user);
         return "quiz";
     }
 
     @RequestMapping(value="/quiz", method=POST)
-    public String quiz(HttpServletRequest request, Model model, HttpSession session){
-        int uId = (Integer)session.getAttribute("loginUser");
-        User user = userService.findUserById(uId);
-        model.addAttribute("user",user);
+    public @ResponseBody String quiz(HttpServletRequest request, HttpSession session){
+        int uid = (Integer)session.getAttribute("loginUser");
+        User user = userService.findUserById(uid);
 
         String title = request.getParameter("title");
         String detail = request.getParameter("detail");
@@ -44,8 +50,6 @@ public class QuizController {
         Question question = new Question();
         String msg = "";
         Date date = new Date();
-
-        System.out.println(user);
 
         question.setTitle(title);
         question.setDetail(detail);
@@ -56,9 +60,12 @@ public class QuizController {
         question.setPublicTime(date);
         //保存问题
         questionService.saveQuestion(question);
+        userService.addQuestionNumById(uid);
 
+        Map<String,String> map = new HashMap<String,String>();
         msg = "提问成功";
-        model.addAttribute("msg",msg);
-        return "quiz";
+        map.put("msg",msg);
+        msg = JSON.toJSONString(map);
+        return msg;
     }
 }

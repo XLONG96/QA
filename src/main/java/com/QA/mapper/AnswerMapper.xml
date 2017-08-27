@@ -13,9 +13,9 @@
         <result column="publicTime" property="publicTime"></result>
     </resultMap>
 
-    <select id="getAnswerList"
+    <select id="getAnswerListByQueId"
             resultType="com.QA.po.Answer">
-        select * from answer where questionId=#{id} limit #{startNum},#{perNum}
+        select * from answer where questionId=#{id} order by answerTime DESC limit #{startNum},#{perNum}
     </select>
 
     <select id="getQueAnswerCount" parameterType="java.lang.Integer"
@@ -27,4 +27,17 @@
         insert into answer values(#{id},#{detail},#{authorName},#{authorHeadImg},
              #{questionId},#{agreeNum},#{disagreeNum},#{starNum},#{commentNum},#{answerTime})
     </insert>
+
+    <select id="getAnswerListByUserName"
+            resultType="com.QA.po.Answer">
+        select * from answer where authorName=#{username} limit #{startNum},#{perNum}
+    </select>
+
+    <delete id="deleteAnswerById" parameterType="java.lang.Integer">
+        delete form answer where id=#{id}
+    </delete>
+
+    <update id="updateProfilePhoto">
+        update answer set authorHeadImg=#{url} where authorName=#{username}
+    </update>
 </mapper>

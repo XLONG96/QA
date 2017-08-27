@@ -11,7 +11,9 @@ public interface AnswerService {
 
     void saveAnswer(Answer answer);
 
-    List<Answer> findAnswerListByUserId(int id, int startNum, int perNum);
+    List<Answer> findAnswerListByUserName(String username, int startNum, int perNum);
 
     void dropAnswerById(int id);
+
+    void saveProfilePhoto(String username, String url);
 }

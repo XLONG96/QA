@@ -32,7 +32,6 @@
                 /ueditor/**=anon
                 /error/**=anon
                 /login=anon
-                /home/**=anon
                 /validate=anon
                 /register=anon
 

@@ -12,6 +12,31 @@
     <title>提问</title>
     <script>
         $(function(){
+            $(".btn").click(function(){
+                $.ajax({
+                    type:"POST",
+                    url:"quiz",
+                    data:$("form").serialize(),
+                    dataType:"json",
+                    success:callback ,
+                    error:function(xhr,info){
+                        alert(xhr.status+" "+xhr.statusText+" "+info);
+                    }
+                });
+
+                function callback(data){
+                    //$( "#dialog" ).dialog( "open" );
+                    if(data.msg!=null){
+                        //$("#dialog p").text(data.msg+" 按“确认/取消”键后刷新页面...");
+                        alert(data.msg+" 按“确认/取消”键后刷新页面...");
+                    }
+                    else{
+                        //$("#dialog p").text("提交失败，请稍后再试...");
+                        alert("提交失败，请稍后再试...");
+                    }
+                }
+            });
+
             $( "#dialog" ).dialog({
                 autoOpen: false,
                 width: 400,
@@ -57,20 +82,11 @@
             <script id="container" name="detail" type="text/plain"></script>
             <script src="${baseurl}js/queEditor.js"></script>
 
-            <input type="submit" value="提交问题" class="btn btn-success" id="qsubmit"/>
+            <input type="button" value="提交问题" class="btn btn-success" id="qsubmit"/>
         </form>
 
         <div id="dialog" title="">
-            <p>
-                <c:choose>
-                    <c:when test="${msg!=null}">
-                        ${msg}
-                    </c:when>
-                    <c:otherwise>
-                        提交问题失败，请重试！
-                    </c:otherwise>
-                </c:choose>
-            </p>
+            <p></p>
         </div>
     </div>
 </body>

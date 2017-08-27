@@ -1,11 +1,12 @@
 package com.QA.po;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by Administrator on 2017/7/18.
  */
-public class Question {
+public class Question implements Serializable{
     private int id;
     private String title;
     private String detail;

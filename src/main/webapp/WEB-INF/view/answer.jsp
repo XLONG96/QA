@@ -27,6 +27,12 @@
 
                 function callback(data){
                     $( "#dialog" ).dialog( "open" );
+                    if(data.msg!=null){
+                        $("#dialog").text(data.msg+" 按“确认/取消”键后刷新页面...");
+                    }
+                    else{
+                        $("#dialog").text("提交失败，请稍后再试...");
+                    }
                 }
             });
 
@@ -35,6 +41,9 @@
                 width: 400,
                 draggable: false,
                 modal: true,
+                close: function() {
+                    location.reload();
+                },
                 buttons: [
                     {
                         text: "确定",
@@ -113,13 +122,82 @@
                 <p><span class="glyphicon glyphicon-comment"></span> ${ans.commentNum} 评论</p>
                 <p><span class="glyphicon glyphicon-star"></span> ${ans.starNum} 收藏</p>
                 <p><span class="glyphicon glyphicon-bell"></span> 举报</p>
-                <p><span class="glyphicon glyphicon-calendar"></span> ${ans.answerTime}</p>
+                <p><span class="glyphicon glyphicon-calendar"></span>
+                    <fmt:formatDate value="${ans.answerTime}" type="both"/></p>
             </div>
         </div>
     </div>
     </c:forEach>
 
-    <%@ include file="paging.jsp"%>
+    <c:if test="${paging.totalPage>1}">
+        <ul class="pagination">
+            <c:if test="${paging.currentPage>1}">
+                <li><a href="${baseurl}answer/${que.id}?cp=${paging.currentPage-1}">&laquo;</a></li>
+            </c:if>
+
+            <c:choose>
+                <c:when test="${paging.currentPage eq 1}">
+                    <li class="active"><a href="${baseurl}answer/${que.id}?cp=1">1</a></li>
+                </c:when>
+                <c:otherwise>
+                    <li><a href="${baseurl}answer/${que.id}?cp=1">1</a></li>
+                </c:otherwise>
+            </c:choose>
+
+            <c:choose>
+                <c:when test="${paging.totalPage<=6}">
+                    <c:set var="begin" value="2"/>
+                    <c:set var="end" value="${paging.totalPage-1}"/>
+                </c:when>
+                <c:otherwise>
+                    <c:set var="begin" value="${paging.currentPage-1}"/>
+                    <c:set var="end" value="${paging.currentPage+1}"/>
+                    <%--头溢出--%>
+                    <c:if test="${begin<3}">
+                        <c:set var="begin" value="2"/>
+                        <c:set var="end" value="5"/>
+                    </c:if>
+                    <%--尾溢出--%>
+                    <c:if test="${end>paging.totalPage-2}">
+                        <c:set var="begin" value="${paging.totalPage-4}"/>
+                        <c:set var="end" value="${paging.totalPage-1}"/>
+                    </c:if>
+                </c:otherwise>
+            </c:choose>
+
+            <c:if test="${paging.currentPage-2>1&&paging.totalPage>6}">
+                <li><a href="#">...</a></li>
+            </c:if>
+
+            <c:forEach var="i" begin="${begin}" end="${end}">
+                <c:choose>
+                    <c:when test="${i eq paging.currentPage}">
+                        <li class="active"><a href="${baseurl}answer/${que.id}?cp="${i}>${i}</a></li>
+                    </c:when>
+                    <c:otherwise>
+                        <li><a href="${baseurl}answer/${que.id}?cp=${i}">${i}</a></li>
+                    </c:otherwise>
+                </c:choose>
+            </c:forEach>
+
+            <c:if test="${paging.currentPage+2<paging.totalPage&&paging.totalPage>6}">
+                <li><a href="#">...</a></li>
+            </c:if>
+
+            <c:choose>
+                <c:when test="${paging.currentPage eq paging.totalPage}">
+                    <li class="active"><a href="${baseurl}answer/${que.id}?cp=${paging.totalPage}">${paging.totalPage}</a></li>
+                </c:when>
+                <c:otherwise>
+                    <li><a href="${baseurl}answer/${que.id}?cp=${paging.totalPage}">${paging.totalPage}</a></li>
+                </c:otherwise>
+            </c:choose>
+
+            <c:if test="${paging.currentPage<paging.totalPage}">
+                <li><a href="${baseurl}answer/${que.id}?cp=${paging.currentPage+1}">&raquo;</a></li>
+            </c:if>
+        </ul>
+    </c:if>
 
     <hr/>
 
@@ -135,9 +213,7 @@
     </div>
 
     <!-- ui-dialog -->
-    <div id="dialog" title="">
-        <p>回答问题成功，按“确认/取消”键后刷新页面...</p>
-    </div>
+    <div id="dialog" title=""></div>
 </div>
 
 <div class="answer-box-info">

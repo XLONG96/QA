@@ -10,6 +10,8 @@ import java.util.List;
 public interface QuestionService {
     List<Question> findQuestionList(int startNum,int perNum);
 
+    List<Question> findAllQuestionList();
+
     void saveQuestion(Question question);
 
     Question findQusetionById(int id);
@@ -20,9 +22,11 @@ public interface QuestionService {
 
     void addStarNumById(int id);
 
-    List<Question> findQuestionListByUserId(int id, int startNum, int perNum);
+    List<Question> findQuestionListByUserName(String username, int startNum, int perNum);
 
-    List<Question> findStarQuestionListByUserId(int id, int startNum, int perNum);
+    List<Question> findStarQuestionListByUserName(String username, int startNum, int perNum);
 
     void dropQuestionById(int id);
+
+    void saveProfilePhoto(String username, String url);
 }

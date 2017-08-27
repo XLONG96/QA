@@ -89,18 +89,19 @@ public class AnswerController {
         Date date = new Date();
         answer.setAnswerTime(date);
         //保存回答者信息
-        int id = (Integer)session.getAttribute("loginUser");
-        User user = userService.findUserById(id);
+        int uid = (Integer)session.getAttribute("loginUser");
+        User user = userService.findUserById(uid);
+        userService.addAnswerNumById(uid);
         answer.setAuthorHeadImg(user.getProfilePhoto());
         answer.setAuthorName(user.getUsername());
 
         answerService.saveAnswer(answer);
 
-        //String msg = "提交成功！";
-        Map<String,String> msg = new HashMap<String,String>();
-        msg.put("msg","提交成功！");
-        String jmsg = JSON.toJSONString(msg);
+        String msg = "提交成功！";
+        Map<String,String> map = new HashMap<String,String>();
+        map.put("msg",msg);
+        msg = JSON.toJSONString(map);
 
-        return jmsg;
+        return msg;
     }
 }

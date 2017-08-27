@@ -16,7 +16,29 @@
             memoryStoreEvictionPolicy="LRU">
     </defaultCache>
 
-    <cache name="baseCache"
+    <cache name="userCache"
+           maxElementsInMemory="200"
+           maxElementsOnDisk="1000"
+           eternal="false"
+           overflowToDisk="true"
+           diskSpoolBufferSizeMB="20"
+           timeToIdleSeconds="300"
+           timeToLiveSeconds="600"
+           memoryStoreEvictionPolicy="LFU" >
+    </cache>
+
+    <cache name="questionCache"
+           maxElementsInMemory="200"
+           maxElementsOnDisk="1000"
+           eternal="false"
+           overflowToDisk="true"
+           diskSpoolBufferSizeMB="20"
+           timeToIdleSeconds="300"
+           timeToLiveSeconds="600"
+           memoryStoreEvictionPolicy="LFU" >
+    </cache>
+
+    <cache name="answerCache"
            maxElementsInMemory="200"
            maxElementsOnDisk="1000"
            eternal="false"

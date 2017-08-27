@@ -8,20 +8,41 @@
         select * from user where username=#{username}
     </select>
 
+    <insert id="insertUserPermission" parameterType="com.QA.po.UserPermission">
+        insert into user_permission values(#{id},#{permission},#{userId})
+    </insert>
+
+    <insert id="insertUser" parameterType="com.QA.po.User">
+        insert into user values(#{id},#{username},#{sex},#{email},#{phone},#{profilePhoto},
+        #{role},#{password},#{fansNum},#{questionNum},#{answerNum},#{starNum},#{commentNum},#{registerTime})
+    </insert>
+
     <select id="getUserById" parameterType="java.lang.Integer"
             resultType="com.QA.po.User">
         select * from user where id=#{id}
     </select>
 
-    <insert id="insertUser" parameterType="com.QA.po.User">
-        insert into user values(#{id},#{username},#{sex},#{email},#{phone},#{profilePhoto},#{role},#{password})
-    </insert>
-
-    <insert id="insertUserPermission" parameterType="com.QA.po.UserPermission">
-        insert into user_permission values(#{id},#{permission},#{userId})
-    </insert>
-
     <update id="updateProfilePhoto">
         update user set profilePhoto=#{url} where id=#{id}
+    </update>
+
+    <update id="updateFansNumById" parameterType="java.lang.Integer">
+        update user set fansNum=fansNum+1 where id=#{id}
+    </update>
+
+    <update id="updateQuestionNumById" parameterType="java.lang.Integer">
+        update user set questionNum=questionNum+1 where id=#{id}
+    </update>
+
+    <update id="updateAnswerNumById" parameterType="java.lang.Integer">
+        update user set answerNum=answerNum+1 where id=#{id}
+    </update>
+
+    <update id="updateStarNumById" parameterType="java.lang.Integer">
+        update user set starNum=starNum+1 where id=#{id}
+    </update>
+
+    <update id="updateCommentNumById" parameterType="java.lang.Integer">
+        update user set commentNum=commentNum+1 where id=#{id}
     </update>
 </mapper>

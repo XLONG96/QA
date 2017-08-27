@@ -3,9 +3,10 @@ package com.QA.service.impl;
 import com.QA.mapper.AnswerMapper;
 import com.QA.po.Answer;
 import com.QA.service.AnswerService;
-import com.googlecode.ehcache.annotations.Cacheable;
+import com.googlecode.ehcache.annotations.TriggersRemove;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 
 import java.util.List;
 
@@ -17,10 +18,10 @@ public class AnswerServiceImpl implements AnswerService{
         this.answerMapper = answerMapper;
     }
 
-    @Cacheable(cacheName = "answerListCache")
+    @Cacheable(value = "answerCache", key="#startNum")
     public List<Answer> findAnswerListByQueId(int id, int startNum, int perNum) {
-        System.out.println("===========test==>>>>");
-        List<Answer> list = answerMapper.getAnswerList(id, startNum, perNum);
+        System.out.println("===========answer==>>>>");
+        List<Answer> list = answerMapper.getAnswerListByQueId(id, startNum, perNum);
 
         return list;
     }
@@ -30,16 +31,22 @@ public class AnswerServiceImpl implements AnswerService{
         return count;
     }
 
-    @CachePut("answerListCache")
+    @CacheEvict(value="answerCache",allEntries=true)
     public void saveAnswer(Answer answer) {
         answerMapper.insertAnswer(answer);
     }
 
-    public List<Answer> findAnswerListByUserId(int id, int startNum, int perNum) {
-        return null;
+    public List<Answer> findAnswerListByUserName(String username, int startNum, int perNum) {
+        List<Answer> list = answerMapper.getAnswerListByUserName(username,startNum,perNum);
+        return list;
     }
 
     public void dropAnswerById(int id) {
+        answerMapper.deleteAnswerById(id);
+    }
 
+    @CacheEvict(value="answerCache",allEntries=true)
+    public void saveProfilePhoto(String username, String url) {
+        answerMapper.updateProfilePhoto(username,url);
     }
 }

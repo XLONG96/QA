@@ -82,5 +82,4 @@
         <property name="cacheSeconds" value="120" />
     </bean>
     -->
-
 </beans>

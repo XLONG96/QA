@@ -14,7 +14,11 @@
     </resultMap>
 
     <select id="getQuestionList" resultMap="question">
-        select * from question limit #{startNum},#{perNum}
+        select * from question  order by publicTime DESC limit #{startNum},#{perNum}
+    </select>
+
+    <select id="getAllQuestionList" resultMap="question">
+        select * from question
     </select>
 
     <insert id="insertQuestion" parameterType="com.QA.po.Question">
@@ -28,7 +32,28 @@
     <select id="getQuestionCount" resultType="java.lang.Integer">
         select count(*) from question;
     </select>
-    <update id="updateReplyNum" parameterType="java.lang.Integer">
+
+    <update id="updateReplyNumById" parameterType="java.lang.Integer">
         update question set replyNum=replyNum+1 where id=#{id}
+    </update>
+
+    <update id="updateStarNumById" parameterType="java.lang.Integer">
+        update question set starNum=starNum+1 where id=#{id}
+    </update>
+
+    <select id="getQuestionListByUserName" resultMap="question">
+        select * from question limit #{startNum},#{perNum} where authorName=#{username}
+    </select>
+
+    <select id="getStarQuestionListByUserName" resultMap="question">
+        select * from question limit #{startNum},#{perNum} where authorName=#{username}
+    </select>
+
+    <delete id="deleteQuestionById" parameterType="java.lang.Integer">
+        delete form question where id=#{id}
+    </delete>
+
+    <update id="updateProfilePhoto">
+        update question set authorHeadImg=#{url} where authorName=#{username}
     </update>
 </mapper>

@@ -11,6 +11,8 @@ import java.util.List;
 public interface QuestionMapper {
     List<Question>  getQuestionList(@Param("startNum")int startNum, @Param("perNum")int perNum);
 
+    List<Question> getAllQuestionList();
+
     void insertQuestion(Question question);
 
     Question getQuestionById(int id);
@@ -21,9 +23,11 @@ public interface QuestionMapper {
 
     void updateStarNumById(int id);
 
-    List<Question>  getQuestionListByUserId(@Param("id") int id, @Param("startNum")int startNum, @Param("perNum")int perNum);
+    List<Question>  getQuestionListByUserName(@Param("username") String username, @Param("startNum")int startNum, @Param("perNum")int perNum);
 
-    List<Question>  getStarQuestionListByUserId(@Param("id") int id, @Param("startNum")int startNum, @Param("perNum")int perNum);
+    List<Question>  getStarQuestionListByUserName(@Param("username") String username, @Param("startNum")int startNum, @Param("perNum")int perNum);
 
     void deleteQuestionById(int id);
+
+    void updateProfilePhoto(@Param("username") String username, @Param("url") String url);
 }

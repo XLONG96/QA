@@ -22,5 +22,6 @@
     margin-top:20px;
 }
 #dialog{
-    z-index:9999;
+    margin-left:200px;
+    z-index:-1;
 }

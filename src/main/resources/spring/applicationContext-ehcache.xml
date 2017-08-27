@@ -5,7 +5,7 @@
         http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
 
     <!-- 开启spring缓存 -->
-    <cache:annotation-driven cache-manager="cacheManager" />
+    <cache:annotation-driven/>
 
     <bean id="cacheManagerFactory" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
         <property name="configLocation" value="classpath:ehcache.xml"/>

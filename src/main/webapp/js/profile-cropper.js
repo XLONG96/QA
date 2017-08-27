@@ -163,6 +163,7 @@
       }
 
       if (this.support.formData) {
+        //alert("hello");
         this.ajaxUpload();
         return false;
       }
@@ -266,7 +267,7 @@
     submitDone: function (data) {
       console.log(data);
 
-      if ($.isPlainObject(data) && data.state === 200) {
+      if ($.isPlainObject(data)) {
         if (data.result) {
           this.url = data.result;
 
@@ -293,6 +294,7 @@
     },
 
     submitEnd: function () {
+        location.reload();
       this.$loading.fadeOut();
     },
 

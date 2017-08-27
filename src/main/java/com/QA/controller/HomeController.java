@@ -100,6 +100,5 @@ public class HomeController {
         questions = JSON.toJSONString(questionList);
 
         return questions;
-
     }
 }

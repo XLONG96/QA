@@ -1,7 +1,13 @@
 .register-box{
     margin-left:280px;
-    margin-top:100px;
+    margin-top:60px;
     width:650px;
+    height:520px;
+    background-color:white;
+    border-radius:8px;
+}
+.register-box form{
+    padding-top:40px;
 }
 .register-box .btn{
     padding-left:60px;
