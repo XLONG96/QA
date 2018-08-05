@@ -17,7 +17,7 @@
 * 用户表
 
 |id|username|sex|email|phone|profilePhoto|role|password|
-|--|--|---|--|--|------------|--------|--|--|
+|--|--|---|--|--|------------|--------|--|
 |int|String|String|String|String|String|String|String|
 |int|varchar()|varchar()|varchar()|varchar()|varchar()|varchar()|varchar()|
 
