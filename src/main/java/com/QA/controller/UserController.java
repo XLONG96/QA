@@ -12,9 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Date;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -23,8 +25,9 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
  * Created by Administrator on 2017/7/15.
  */
 @Controller
-//@RequestMapping("/user")
 public class UserController {
+    protected Logger logger = LoggerFactory.getLogger(UserController.class);
+
     @Autowired
     public UserService userService;
 
@@ -35,9 +38,6 @@ public class UserController {
 
     @RequestMapping(value="/login", method=POST)
     public String login(HttpServletRequest request, HttpSession session, Model model){
-        Logger logger = LoggerFactory.getLogger(UserController.class);
-        logger.info("login");
-
         String msg = "";
         boolean rememberMe = false;
         String username = request.getParameter("username");
@@ -125,7 +125,6 @@ public class UserController {
 
     @RequestMapping(value="/register", method=POST)
     public String register(HttpServletRequest request, Model model){
-        Logger logger = LoggerFactory.getLogger(UserController.class);
         logger.info("Register");
 
         User user = new User();
@@ -146,6 +145,7 @@ public class UserController {
         String phone = request.getParameter("phone");
         String profilePhone = request.getParameter("profilePhone");
         String password = request.getParameter("password");
+        Date date = new Date();
 
         if(username != null){
             user.setUsername(username);
@@ -173,13 +173,17 @@ public class UserController {
             user.setPassword(password);
         }
 
+        user.setRegisterTime(date);
+
         userService.addUser(user);
 
         return "redirect:login";
     }
 
-    @RequestMapping("/setting")
-    public String setting(){
-        return "setting";
+    @RequestMapping(value="/setting",method=GET)
+    public @ResponseBody User setting(HttpSession session){
+        int id = (Integer)session.getAttribute("loginUser");
+        return userService.findUserById(id);
+        //return "setting";
     }
 }

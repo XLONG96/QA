@@ -8,11 +8,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
-    <h1>You are refuse!</h1>
-    <hr>
+    <title>401</title>
 </head>
 <body>
-
+<h1>抱歉，您没有相关权限！</h1>
+<hr>
 </body>
 </html>
